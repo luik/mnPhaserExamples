@@ -1,23 +1,29 @@
 /**
  * Created by Luis on 6/22/2016.
  */
-class PlayState
+class PlayState extends Phaser.State
 {
     player;
     win;
     keyboard;
+    input;
 
     create(){
-        this.keyboard = game.input.keyboard;
-        this.player = game.add.sprite(16, 16, "player");
-        game.physics.enable(this.player, Phaser.Physics.ARCADE);
+        this.keyboard = this.game.input.keyboard;
+        this.player = this.game.add.sprite(16, 16, "player");
+        this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
 
-        this.win = game.add.sprite(256, 256, "win");
-        game.physics.enable(this.win, Phaser.Physics.ARCADE);
+        this.win = this.game.add.sprite(256, 256, "win");
+        this.game.physics.enable(this.win, Phaser.Physics.ARCADE);
+
+        let container:Phaser.Sprite = this.game.add.sprite(10, 90, "container");
+        this.input = this.game.add["inputField"](10, 90);
+        container.addChild(this.input);
+        console.log(this.input, container);
     }
 
     update(){
-        game.physics.arcade.overlap(this.player, this.win, this.onWin, null, this);
+        this.game.physics.arcade.overlap(this.player, this.win, this.onWin, null, this);
         
         if(this.keyboard.isDown(Phaser.Keyboard.A)){
             this.player.body.velocity.x = -175;
@@ -42,10 +48,12 @@ class PlayState
         {
             this.player.body.velocity.y = 0;
         }
+
+        this.input.update();
     }
     
     onWin(){
-        game.state.start("win");    
+        this.game.state.start("win");    
     }
 }
 

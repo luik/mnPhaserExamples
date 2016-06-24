@@ -4,6 +4,7 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$" />
     <content url="file://$MODULE_DIR$/../phaser" />
+    <content url="file://$MODULE_DIR$/../phaser-input" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

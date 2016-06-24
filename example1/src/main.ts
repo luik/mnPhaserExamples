@@ -7,12 +7,16 @@ window.onload = () =>
     testgame.greeter();
 
     let game = new Phaser.Game(800, 600, Phaser.AUTO, "");
+    game.plugins = new Phaser.PluginManager(game);
+    game.plugins.add(Fabrique.Plugins.InputField);
 
-    game.state.add("boot", BootState);
-    game.state.add("load", LoadState);
-    game.state.add("menu", MenuState);
-    game.state.add("play", PlayState);
-    game.state.add("win", WinState);
+    game.state.add("boot", new BootState());
+    game.state.add("load", new LoadState());
+    game.state.add("menu", new MenuState());
+    game.state.add("play", new PlayState());
+    game.state.add("win", new WinState());
 
     game.state.start("boot");
+
+    console.log(game);
 };
